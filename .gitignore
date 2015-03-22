@@ -1,0 +1,2 @@
+# No incluyo en GIT datos como passwords o nombres de usuario
+config/sensible_data/*
