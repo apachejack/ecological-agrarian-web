@@ -1,6 +1,10 @@
 <nav id="mainmenu" class="mainmenu">
     <ul>
-        <li class="logo-wrapper"><a href="{{ link('index.html') }}"><img src="{{ asset('img/mPurpose-logo.png') }}" alt="Multipurpose Twitter Bootstrap Template"></a></li>
+        <li class="logo-wrapper">
+            <a href="{{ path("homepage") }}">
+                <img src="{{ asset('img/mPurpose-logo.png') }}" alt="Multipurpose Twitter Bootstrap Template">
+            </a>
+        </li>
 
         {% for item in menu %}
             {% if item.active %}
