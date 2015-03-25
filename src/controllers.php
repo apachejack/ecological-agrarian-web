@@ -118,6 +118,12 @@ $app->get('/login/', function() use ($app){
 })
 ->bind("login");
 
+
+$app->get('/admin/', function() use ($app){
+    return $app["twig"]->render('admin/layout.html', array());
+})
+->bind("admin");
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
