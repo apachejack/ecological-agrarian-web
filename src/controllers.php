@@ -73,6 +73,17 @@ $app->get('/producto/{id}', function ($id) use ($app) {
 })
 ->bind('producto');
 
+
+$app->get('/sobre-nosotros/', function() use ($app) {
+    $data = array(
+        "menu" => $app["mainMenu"]->getData()
+    );
+
+    return $app["twig"]->render('about_us/index.html', $data);
+})
+->bind('sobre_nosotros');
+
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
