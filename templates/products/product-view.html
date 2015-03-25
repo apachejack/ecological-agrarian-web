@@ -1,5 +1,13 @@
 {% extends "layout.html" %}
 
+{% if product.image_path is null %}
+	{%
+		set image_path = "img/product3.jpg"
+	%}
+{% else %}
+	{% set image_path = product.image_path %}
+{% endif %}
+
 {% block title %}
 	Producto {{ product.title|default("desconocido") }} {{ product.id }}
 {% endblock %}
@@ -22,7 +30,8 @@
     			<!-- Product Image & Available Colors -->
     			<div class="col-sm-6">
     				<div class="product-image-large">
-    					<img src="{{ asset('img/product3.jpg') }}" alt="Item Name">
+
+    					<img src="{{ asset(product.image_path) }}" alt="Item Name">
     				</div>
     				<div class="colors">
 						<span class="color-white"></span>
@@ -39,6 +48,11 @@
     				<div class="price">
 						<span class="price-was">$959.99</span> $999.99
 					</div>
+
+					<h5>Estado</h5>
+						{{product.status}}
+					</h5>
+
 					<h5>Quick Overview</h5>
     				<p>
     					{{ product.description }}

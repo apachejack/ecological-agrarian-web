@@ -1,2 +1,5 @@
 # No incluyo en GIT datos como passwords o nombres de usuario
 config/sensible_data/*
+
+# Tampoco el contenido de la carpeta uploads
+web/uploads/*
