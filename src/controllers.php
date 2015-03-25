@@ -96,6 +96,18 @@ $app->get('/contacta/', function() use ($app) {
 ->bind('contacta');
 
 
+$app->get('/shopping_cart/', function() use ($app){
+
+    $data = array(
+        "menu" => $app["mainMenu"]->getData()
+    );
+
+    return $app["twig"]->render('shopping_cart/index.html', $data);
+
+})
+->bind('shopping_cart');
+
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
