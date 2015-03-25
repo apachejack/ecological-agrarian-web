@@ -3,13 +3,15 @@ namespace Myapp\Controller;
 
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
+use Myapp\Models\Product;
 
 class ProductController
 {
 
 	public function get(Request $request, Application $app, $id){
+		$Product = new Product($app, $id);
 	    $data = array(
-	        "id" => $id, 
+	        "product" => $Product->getDetails(), 
 	        "menu" => $app["mainMenu"]->getData()
 	    );
 
