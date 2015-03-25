@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-	Producto {{ name|default("desconocido") }} {{ id }}
+	Producto {{ product.title|default("desconocido") }} {{ product.id }}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<h1>Product Details</h1>
+					<h1>Detalles del producto</h1>
 				</div>
 			</div>
 		</div>
@@ -22,7 +22,7 @@
     			<!-- Product Image & Available Colors -->
     			<div class="col-sm-6">
     				<div class="product-image-large">
-    					<img src="img/product3.jpg" alt="Item Name">
+    					<img src="{{ asset('img/product3.jpg') }}" alt="Item Name">
     				</div>
     				<div class="colors">
 						<span class="color-white"></span>
@@ -35,13 +35,13 @@
     			<!-- End Product Image & Available Colors -->
     			<!-- Product Summary & Options -->
     			<div class="col-sm-6 product-details">
-    				<h4>LOREM IPSUM DOLOR</h4>
+    				<h4>{{ product.title }}</h4>
     				<div class="price">
 						<span class="price-was">$959.99</span> $999.99
 					</div>
 					<h5>Quick Overview</h5>
     				<p>
-    					Morbi eleifend congue elit nec sagittis. Praesent aliquam lobortis tellus, nec consequat massa ornare vitae. Ut fermentum justo vel venenatis eleifend. Fusce id magna eros.
+    					{{ product.description }}
     				</p>
 					<table class="shop-item-selections">
 						<!-- Color Selector -->
