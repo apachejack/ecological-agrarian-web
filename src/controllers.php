@@ -108,6 +108,16 @@ $app->get('/shopping_cart/', function() use ($app){
 ->bind('shopping_cart');
 
 
+$app->get('/login/', function() use ($app){
+    $data = array(
+        "menu" => $app["mainMenu"]->getData()
+    );
+
+    return $app["twig"]->render('login/index.html', $data);
+
+})
+->bind("login");
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
