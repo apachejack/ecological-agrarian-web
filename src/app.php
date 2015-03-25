@@ -39,6 +39,9 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
     return $twig;
 });
 
+
+$app->register(new Silex\Provider\MonologServiceProvider());
+
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
     'db.options' => array (
         'driver'    => 'pdo_mysql',

@@ -23,54 +23,12 @@ $app->get('/', function () use ($app) {
 ->bind('homepage')
 ;
 
-$app->get('/productos', function () use ($app) {
-
-    $products = array(
-        array(
-            "title" => "sadfasd", 
-            "prize" => "12€", 
-            "description" => "lore lore", 
-            "id" => 5
-        ), 
-        array(
-            "title" => "sadfads", 
-            "prize" => "15€", 
-            "description" => "penes", 
-            "id" => 5
-        ), 
-        array(
-            "title" => "sadfasd", 
-            "prize" => "12€", 
-            "description" => "lore lore", 
-            "id" => 5
-        ), 
-        array(
-            "title" => "sadfads", 
-            "prize" => "15€", 
-            "description" => "penes", 
-            "id" => 5
-        )
-    );
-
-    $data = array(
-        "products" => $products, 
-        "menu" => $app["mainMenu"]->getData()
-    );
-
-    return $app['twig']->render('catalogue/index.html', $data);
-})
+$app->get('/productos', "Myapp\Controller\ProductsSearchController::getAll")
 ->bind('productos')
 ;
 
 
-$app->get('/producto/{id}', function ($id) use ($app) {
-    $data = array(
-        "id" => $id, 
-        "menu" => $app["mainMenu"]->getData()
-    );
-
-    return $app['twig']->render('products/product-view.html', $data);
-})
+$app->get('/producto/{id}', "Myapp\Controller\ProductController::get")
 ->bind('producto');
 
 
