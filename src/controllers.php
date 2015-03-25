@@ -84,6 +84,18 @@ $app->get('/sobre-nosotros/', function() use ($app) {
 ->bind('sobre_nosotros');
 
 
+$app->get('/contacta/', function() use ($app) {
+
+    $data = array(
+        "menu" => $app["mainMenu"]->getData()
+    );
+
+    return $app["twig"]->render('contact/index.html', $data);
+
+})
+->bind('contacta');
+
+
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {
         return;
