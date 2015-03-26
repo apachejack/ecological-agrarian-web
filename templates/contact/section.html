@@ -37,6 +37,10 @@
     						<div class="alert alert-success">
     							Su mensaje se ha enviado. Le responderemos cuanto antes.
     						</div>
+    					{% elseif status == "fail" and errors is null %}
+     						<div class="alert alert-danger">
+    							No se ha podido enviar el E-Mail, vuelva a intentarlo.
+    						</div>  					
     					{% elseif not errors is null %}
     						<div class="alert alert-danger">
     							Revise los campos

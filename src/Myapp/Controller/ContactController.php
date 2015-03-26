@@ -14,6 +14,7 @@ class ContactController
         	"menu" => $app["mainMenu"]->getData(), 
         	"status" => $app["session"]->get("contact_status", NULL), 
         	"errors" => $app["session"]->get("contact_errors", NULL), 
+        	"error_mail" => $app["session"]->get("error_mail", NULL), 
         	"data_form" => $app["session"]->get("contact_data_form", NULL)
    		);
 
@@ -46,7 +47,13 @@ class ContactController
 		$errors_validator = $app["validator"]->validateValue($campos, $constraint);
 
 		if(count($errors_validator) == 0){
-			$app["session"]->set("contact_status", "success");
+			if($this->sendEmail($app, $campos)){
+				$app["session"]->set("contact_status", "success");
+			}
+			else{
+				$app["session"]->set("contact_status", "fail");
+				$app["session"]->set("error_mail", true);
+			}
 		}
 		else{
 			//Guardamos los errores en una variable más cómoda para leer con TWIG
@@ -64,8 +71,17 @@ class ContactController
 		return $app->redirect($app["url_generator"]->generate("contacta"));
 	}
 
-	protected function sendEmail($data){
+	protected function sendEmail($app, $data){
 
+		$body = $app["twig"]->render("contact/contact-email.html", $data);
+
+	    $message = \Swift_Message::newInstance()
+	        ->setSubject('Formulario de contacto')
+	        ->setFrom(array($data["email"]))
+	        ->setTo(array(OWNER_MAIN_EMAIL))
+	        ->setBody($body);
+
+	    return $app['mailer']->send($message);
 
 	}
 
@@ -73,6 +89,7 @@ class ContactController
 		$app["session"]->remove("contact_status");
 		$app["session"]->remove("contact_errors");
 		$app["session"]->remove("contact_data_form");
+		$app["session"]->remove("error_mail");
 	}
 
 }

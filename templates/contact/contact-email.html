@@ -1,0 +1,13 @@
+{% extends "emails/main.html" %}
+
+{% block content %}
+<b>Nombre</b>: {{ name }}
+<br />
+<b>E-Mail</b>: {{ email }}
+<br />
+<b>Asunto</b>: {{ topic }}
+<br />
+<p>
+	{{ message }}
+</p>
+{% endblock %}
