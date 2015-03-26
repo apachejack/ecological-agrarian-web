@@ -29,25 +29,46 @@
     		</div>
     		<div class="col-sm-5">
     			<!-- Contact Form -->
-    			<h3>Send Us a Message</h3>
+    			<h3>Envíanos un mensaje</h3>
     			<div class="contact-form-wrapper">
-        			<form class="form-horizontal" role="form">
+
+    				{% if not status is null %}
+    					{% if status == "success" %}
+    						<div class="alert alert-success">
+    							Su mensaje se ha enviado. Le responderemos cuanto antes.
+    						</div>
+    					{% elseif not errors is null %}
+    						<div class="alert alert-danger">
+    							Revise los campos
+    						</div>
+    					{% endif %}
+    				{% endif %}
+
+        			<form class="form-horizontal" role="form" method="POST" action="{{ path('contact-send-message') }}">
         				 <div class="form-group">
-        				 	<label for="Name" class="col-sm-3 control-label"><b>Your name</b></label>
+        				 	<label for="Name" class="col-sm-3 control-label"><b>Tu nombre</b></label>
         				 	<div class="col-sm-9">
-								<input class="form-control" id="Name" type="text" placeholder="">
+								<input class="form-control" name="name" id="Name" type="text" placeholder="" value="{{data_form.name|default("") }}" />
+
+        				 		{% if errors["[name]"] is defined %}
+        				 			<div class="bg bg-danger">{{ errors["[name]"] }}</div>
+        				 		{% endif %}
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="contact-email" class="col-sm-3 control-label"><b>Your Email</b></label>
+							<label for="contact-email" class="col-sm-3 control-label"><b>Tu E-Mail</b></label>
 							<div class="col-sm-9">
-								<input class="form-control" id="contact-email" type="text" placeholder="">
+								<input class="form-control" name="email" id="contact-email" type="text" placeholder="" value="{{ data_form.email|default("") }}" />
+
+        				 		{% if errors["[email]"] is defined %}
+        				 			<div class="bg bg-danger">{{ errors["[email]"] }}</div>
+        				 		{% endif %}
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="contact-message" class="col-sm-3 control-label"><b>Select Topic</b></label>
+							<label for="contact-message" class="col-sm-3 control-label"><b>Asunto</b></label>
 							<div class="col-sm-9">
-								<select class="form-control" id="prependedInput">
+								<select class="form-control" name="topic" id="prependedInput">
 									<option>Please select topic...</option>
 									<option>General</option>
 									<option>Services</option>
@@ -56,14 +77,18 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="contact-message" class="col-sm-3 control-label"><b>Message</b></label>
+							<label for="contact-message" class="col-sm-3 control-label"><b>Mensaje</b></label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="5" id="contact-message"></textarea>
+								<textarea class="form-control" name="message" rows="5" id="contact-message">{{ data_form.message|default("") }}</textarea>
+
+        				 		{% if errors["[message]"] is defined %}
+        				 			<div class="bg bg-danger">{{ errors["[message]"] }}</div>
+        				 		{% endif %}
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-12">
-								<button type="submit" class="btn pull-right">Send</button>
+								<button type="submit" class="btn pull-right">Enviar</button>
 							</div>
 						</div>
         			</form>

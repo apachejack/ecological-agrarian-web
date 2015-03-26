@@ -42,16 +42,11 @@ $app->get('/sobre-nosotros/', function() use ($app) {
 ->bind('sobre_nosotros');
 
 
-$app->get('/contacta/', function() use ($app) {
-
-    $data = array(
-        "menu" => $app["mainMenu"]->getData()
-    );
-
-    return $app["twig"]->render('contact/index.html', $data);
-
-})
+$app->get('/contacta/', "Myapp\Controller\ContactController::getForm")
 ->bind('contacta');
+
+$app->post('/contacta/', "Myapp\Controller\ContactController::postMessage")
+->bind("contact-send-message");
 
 
 $app->get('/shopping_cart/', function() use ($app){
