@@ -34,18 +34,11 @@ class Product{
 		$stmt->execute();
 
 		$product = $stmt->fetch();
-		$product["image_path"] = Product::formatImagePath($product["image_path"]);
+		$product["image_path"] = GalleryPic::getMediumPath($product["image_path"]);
 
 
 		return $product;
 
-	}
-
-	public static function formatImagePath($path){
-		if(is_null($path)){
-			return $path;
-		}
-		return "uploads/images/".$path;
 	}
 
 }

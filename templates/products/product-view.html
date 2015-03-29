@@ -12,6 +12,25 @@
 	Producto {{ product.title|default("desconocido") }} {{ product.id }}
 {% endblock %}
 
+{% block css %}
+	{{ parent() }}
+	 <link rel="stylesheet" href="{{ asset('js/lib/blueimp-gallery/css/blueimp-gallery.min.css') }}">
+{% endblock %}
+
+{% block javascript %}
+	{{ parent() }}
+	<script src="{{ asset('js/lib/blueimp-gallery/js/blueimp-gallery.min.js') }}"></script>
+		<script type="text/javascript">
+			var links = {{ blueimp_pics|raw }};
+			var options = {
+       			 container: '#blueimp-gallery-carousel',
+       			 carousel: true, 
+       			 startSlideshow: false
+    		};
+    		var gallery = blueimp.Gallery(links, options);
+		</script>
+{% endblock %}
+
 {% block content %}
    <!-- Page Title -->
 	<div class="section section-breadcrumbs">
@@ -28,22 +47,15 @@
     	<div class="container">
     		<div class="row">
     			<!-- Product Image & Available Colors -->
-    			<div class="col-sm-6">
+    			<div class="col-sm-7">
     				<div class="product-image-large">
-
-    					<img src="{{ asset(product.image_path) }}" alt="Item Name">
+    					{% include "blueimp/gallery.html" %}
     				</div>
-    				<div class="colors">
-						<span class="color-white"></span>
-						<span class="color-black"></span>
-						<span class="color-blue"></span>
-						<span class="color-orange"></span>
-						<span class="color-green"></span>
-					</div>
+
     			</div>
     			<!-- End Product Image & Available Colors -->
     			<!-- Product Summary & Options -->
-    			<div class="col-sm-6 product-details">
+    			<div class="col-sm-5 product-details">
     				<h4>{{ product.title }}</h4>
     				<div class="price">
 						<span class="price-was">$959.99</span> $999.99

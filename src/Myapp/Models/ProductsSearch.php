@@ -39,7 +39,7 @@ class ProductsSearch{
 
 	protected function formatAllImagesPaths(array $products){
 		array_walk($products, function(&$product){
-			$product["image_path"] = Product::formatImagePath($product["image_path"]);
+			$product["image_path"] = GalleryPic::getMediumPath($product["image_path"]);
 		});
 
 		return $products;
